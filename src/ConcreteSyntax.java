@@ -135,7 +135,7 @@ public class ConcreteSyntax {
 			s = whileStatement(); //MY PART
 		} else if (token.getType().equals("Identifier")) { // Assignment
 			// TO BE COMPLETED
-			
+			s = assignment();// MY PART
 		} else
 			throw new RuntimeException(SyntaxError("Statement"));
 		return s;
@@ -155,7 +155,15 @@ public class ConcreteSyntax {
 		Assignment a = new Assignment();
 		if (token.getType().equals("Identifier")) {
 			// TO BE COMPLETED
-			a = assignment(); //MY PART
+			//MY PART
+			a.target = new Variable();
+			a.target.id = token.getValue();
+			token = input.nextToken();
+			match("=");
+			a.source = expression();
+			match(";");
+			
+			
 		} else
 			throw new RuntimeException(SyntaxError("Identifier"));
 		return a;
